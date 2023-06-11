@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: api
+    hostname: api
+    ports:
+      - "3000:3000"
+    restart: always
+    env_file:
+      - .env
+
+
+  varnish:
+      build:
+        context: varnish
+      depends_on:
+        - api
+      ports:
+        - "80:80"
+        - "6082:6082"
+      links:
+        - api

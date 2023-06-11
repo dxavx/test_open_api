@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info :
+  title: Test API
+  version: '1.0'
+servers:
+  - url : 'http://localhost:3000'
+    description: 'Localhost'
+paths:
+  /ping:
+    get:
+      summary: Проверка работоспособности сервера.
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ping'
+        '500':
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - ping
+
+  /square:
+    post:
+      summary: Возвращает квадрат числа
+      responses:
+        '200':
+          $ref: '#/components/responses/SquareResponses'
+      requestBody:
+        $ref: '#/components/requestBodies/SquareRequest'
+      tags:
+        - square
+
+
+
+  /logo:
+    post:
+      summary: Загрузка файла логотипа
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateLogoResponses'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateLogoRequest'
+      tags:
+        - Upload Logo (base64)
+
+
+components:
+
+  schemas:
+
+    Ping:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Server External Error"
+
+  responses:
+
+    SquareResponses:
+      description: Запрос на загрузку видео клипа
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              square_x:
+                type: integer
+                example: 4
+
+    CreateLogoResponses:
+      description: Запрос на загрузку логотипа
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                example: http://s3.localhost.local/logo.png
+
+
+  requestBodies:
+
+    SquareRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              x:
+                type: integer
+                example: 2
+
+    CreateLogoRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              filename:
+                type: string
+                description: Имя файла логотипа
+                example: logo_text
+              logo:
+                type: string
+                description: Изображение в (base64) в Go из запоса можно сразу записывать в файл
+                format: byte
+                example: iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAG1BMVEXMzMyWlpaqqqq3t7exsbGcnJy+vr6jo6PFxcUFpPI/AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAQUlEQVQ4jWNgGAWjgP6ASdncAEaiAhaGiACmFhCJLsMaIiDAEQEi0WXYEiMCOCJAJIY9KuYGTC0gknpuHwXDGwAA5fsIZw0iYWYAAAAASUVORK5CYII=

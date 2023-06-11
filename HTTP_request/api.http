@@ -1,0 +1,24 @@
+## Ping
+
+GET http://localhost:3000/ping
+
+###
+
+## Возведение числа в квадрат
+POST http://localhost:3000/square
+
+{
+  "x" :  4
+}
+
+###
+## Загрузка картинки строкой (base64)
+POST http://localhost:3000/logo
+
+{
+  "filename": "03.png",
+  "logo": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAG1BMVEXMzMyWlpaqqqq3t7exsbGcnJy+vr6jo6PFxcUFpPI/AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAQUlEQVQ4jWNgGAWjgP6ASdncAEaiAhaGiACmFhCJLsMaIiDAEQEi0WXYEiMCOCJAJIY9KuYGTC0gknpuHwXDGwAA5fsIZw0iYWYAAAAASUVORK5CYII="
+}
+
+
+
