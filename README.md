@@ -1,6 +1,6 @@
 ##Test project of code generation with Open API 3.0
 
-* Install :
+* Install:
 
 <code> go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen</code>
 
